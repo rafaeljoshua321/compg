@@ -1,0 +1,65 @@
+//* RAFAEL JOSHUA ALFAFARA //*
+//* BSIT - 1B //*
+
+import java.util.Scanner;
+
+public class AirplaneSeating {
+
+    public static void main(String[] args) {
+        
+        // Create a 2D array to represent the seating chart
+        int[][] seatingChart = new int[10][4];
+        
+        // Initialize all seats to 0, indicating they are unoccupied
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 4; j++) {
+                seatingChart[i][j] = 0;
+            }
+        }
+        
+        Scanner scanner = new Scanner(System.in);
+        
+        // Loop until all seats are taken
+        while (true) {
+            
+            // Display the seating chart
+            System.out.println("Seating Chart:");
+            for (int i = 0; i < 10; i++) {
+                for (int j = 0; j < 4; j++) {
+                    System.out.print(seatingChart[i][j] + " ");
+                }
+                System.out.println();
+            }
+            
+            // Ask the user for their seat preference
+            System.out.println("Please enter your seat preference (row column):");
+            int row = scanner.nextInt();
+            int column = scanner.nextInt();
+            
+            // Check if the seat is already taken
+            if (seatingChart[row-1][column-1] == 1) {
+                System.out.println("That seat is already taken. Please choose another.");
+            } else {
+                seatingChart[row-1][column-1] = 1;
+                System.out.println("Your seat has been assigned.");
+            }
+            
+            // Check if all seats are taken
+            boolean allTaken = true;
+            for (int i = 0; i < 10; i++) {
+                for (int j = 0; j < 4; j++) {
+                    if (seatingChart[i][j] == 0) {
+                        allTaken = false;
+                    }
+                }
+            }
+            if (allTaken) {
+                System.out.println("All seats have been taken. Enjoy your flight!");
+                break;
+            }
+        }
+        
+        scanner.close();
+    }
+
+}
